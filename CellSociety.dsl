@@ -1,10 +1,10 @@
 job(type: Maven) {
-  name 'Spring 2015/cellsociety_team17'
+  name '${SEMESTER}/${PROJECT}/${TEAM}'
   description 'Build and test the app.'
   scm {
     git {
       remote {
-        github('duke-compsci308-spring2015/cellsociety_team17', 'ssh')
+        github('${GITHUB_ORG}/${GITHUB_REPO}', 'ssh')
         credentials('GitHub SSH Key')
       }
       branches '*/master'
@@ -18,7 +18,7 @@ job(type: Maven) {
     }
   }
   goals 'validate compile'
-  
+
   configure { project ->
     project/publishers << 'hudson.plugins.sonar.SonarPublisher' {
       jdk('(Inherit from Job)')
@@ -43,4 +43,3 @@ job(type: Maven) {
     }
   }
 }
-        
