@@ -3,3 +3,4 @@ public/components
 .sass-cache
 web/.idea/workspace.xml
 web\.idea\workspace.xml
+*.log
