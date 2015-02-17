@@ -21,7 +21,7 @@ var github = function() {
      */
     var repositoryEvent = function (data) {
         if (data.action === "created") {
-            
+            console.log(data);
         }
     };
 
