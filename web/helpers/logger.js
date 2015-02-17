@@ -1,17 +1,21 @@
-var express = require('express');
 var winston = require('winston');
 
-var verify = function() {
+var logger = function() {
 
-    return {
-        /**
-         * Verifies that an organization is part of Duke.
-         * @param name
-         */
-        organizationName: function(name) {
-            return name.indexOf('duke') >= 0;
-        }
-    }
+    winston.emitErrs = true;
+
+    var log = new winston.Logger({
+       transports: [
+           new winston.transports.Console({
+               level: 'debug',
+               handleExceptions: true,
+               json: false,
+               colorize: true
+           })
+       ]
+    });
+
+    return log;
 };
 
-module.exports = verify();
+module.exports = logger();
