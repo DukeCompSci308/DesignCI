@@ -1,5 +1,8 @@
 var express = require('express');
 
+var winston = require('./logger');
+var verify = require('./verify');
+
 var github = function() {
     var handleEvent  = function(event, data) {
         // Handle the events we care about - https://developer.github.com/v3/activity/events/types
@@ -21,7 +24,16 @@ var github = function() {
      */
     var repositoryEvent = function (data) {
         if (data.action === "created") {
-            console.log(data);
+            winston.info("New repo created: " + data.repository.name);
+            winston.info("Organization: " + data.organization.login);
+            if (!verify.organizationName(data.organization.login)) {
+                winston.warn('This organization is not part of Duke.');
+                return;
+            }
+            winston.info('Valid organization and repo.');
+            winston.info('Setting up repo for CI tools.');
+
+
         }
     };
 
