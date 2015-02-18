@@ -1,6 +1,7 @@
 var express = require('express');
 
 var winston = require('./logger');
+var maven = require('./maven');
 var verify = require('./verify');
 
 var github = function() {
@@ -32,8 +33,15 @@ var github = function() {
             }
             winston.info('Valid organization and repo.');
             winston.info('Setting up repo for CI tools.');
+            var gitHelper = require('./git')(data.repository);
+            var git = gitHelper.git;
+            gitHelper.clone(function(err, cloneFolder) {
+                maven.config(data.repository, cloneFolder, function() {
 
+                });
 
+            });
+            winston.info('Cloned Repo');
         }
     };
 
