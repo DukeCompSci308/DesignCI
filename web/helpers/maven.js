@@ -2,44 +2,39 @@ var express = require('express');
 
 var winston = require('./logger');
 var verify = require('./verify');
+var fs = require('fs-extra');
+var replace = require('replace');
 
-var github = function() {
-    var handleEvent  = function(event, data) {
-        // Handle the events we care about - https://developer.github.com/v3/activity/events/types
-        switch (event) {
-            case 'repository':
-                repositoryEvent(data);
-                break;
-            case 'commit_comment':
-            case 'fork':
-            case 'pull_request':
-                break;
-        }
+var maven = function() {
 
+    var replaceConfigVariables = function(file, old, value) {
+        winston.info('file: ' + file);
+        winston.info('old: ' + old);
+        winston.info('value: ' + value);
+        replace({
+            regex: old,
+            replacement: value,
+            paths: [file]
+        });
     };
 
-    /**
-     * Occurs when an event occurs on a repository. Currently only a create event.
-     * @param data The data that was sent for the event.
-     */
-    var repositoryEvent = function (data) {
-        if (data.action === "created") {
-            winston.info("New repo created: " + data.repository.name);
-            winston.info("Organization: " + data.organization.login);
-            if (!verify.organizationName(data.organization.login)) {
-                winston.warn('This organization is not part of Duke.');
-                return;
-            }
-            winston.info('Valid organization and repo.');
-            winston.info('Setting up repo for CI tools.');
+    var createConfig = function(repo, folder, then) {
+        var pomFile = "scripts/pom.xml";
+        var destFile = folder + '/repo/pom.xml';
 
+        fs.copy(pomFile, destFile, function(err) {
+            if (err) winston.error(err);
+            replaceConfigVariables(destFile, '{ORGANIZATION}', repo.owner.login);
+            replaceConfigVariables(destFile, '{REPO}', repo.name);
 
-        }
+            winston.info('Created Maven pom file.');
+            then();
+        });
     };
 
     return {
-        handleEvent: handleEvent
+        config : createConfig
     }
 };
 
-module.exports = github();
+module.exports = maven();

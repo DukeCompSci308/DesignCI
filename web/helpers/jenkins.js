@@ -3,7 +3,7 @@ var express = require('express');
 var winston = require('./logger');
 var verify = require('./verify');
 
-var github = function() {
+var jenkins = function() {
     var handleEvent  = function(event, data) {
         // Handle the events we care about - https://developer.github.com/v3/activity/events/types
         switch (event) {
@@ -42,4 +42,4 @@ var github = function() {
     }
 };
 
-module.exports = github();
+module.exports = jenkins();
