@@ -4,17 +4,39 @@
     <!-- REPO is replaced with the repo name (slogo_team01) -->
     <groupId>{ORGANIZATION}.{REPO}</groupId>
     <artifactId>{REPO}</artifactId>
-    <version>master</version>
+    <version>master-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>javafx</artifactId>
+            <version>8.0.31</version>
+            <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
+            <scope>system</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <sourceDirectory>.</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>3.2</version>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
                 <configuration>
                     <encoding>iso-8859-1</encoding>
+                    <excludes>
+                        <exclude>src/**/*Test.java</exclude>
+                        <exclude>src/**/Test*.java</exclude>
+                        <exclude>src/**/*Test*.java</exclude>
+                    </excludes>
                     <includes>
                         <include>src/**/*.java</include>
                     </includes>
@@ -24,13 +46,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>
