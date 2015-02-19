@@ -37,7 +37,11 @@ var github = function() {
             var git = gitHelper.git;
             gitHelper.clone(function(err, cloneFolder) {
                 maven.config(data.repository, cloneFolder, function() {
-
+                    winston.info('pom file configured and placed in repo.');
+                    git.add('pom.xml').commit('Setup maven pom.xml file.').push(function(err) {
+                       if (err) winston.error(err);
+                        winston.info('Added pom file, committed, and pushed.');
+                    });
                 });
 
             });
