@@ -1,10 +1,18 @@
+folder {
+	name "${SEMESTER}"
+}
+
+folder {
+	name "${SEMESTER}/${PROJECT}"
+}
+
 job(type: Maven) {
-  name '${SEMESTER}/${PROJECT}/${TEAM}'
+  name "${SEMESTER}/${PROJECT}/${TEAM}"
   description 'Build and test the app.'
   scm {
     git {
       remote {
-        github('${GITHUB_ORG}/${GITHUB_REPO}', 'ssh')
+        github("${GITHUB_ORG}/${GITHUB_REPO}", 'ssh')
         credentials('GitHub SSH Key')
       }
       branches '*/master'
