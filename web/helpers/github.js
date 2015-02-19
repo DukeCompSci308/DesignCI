@@ -4,6 +4,8 @@ var winston = require('./logger');
 var maven = require('./maven');
 var verify = require('./verify');
 
+var jenkins = require('./jenkins');
+
 var github = function() {
     var handleEvent  = function(event, data) {
         // Handle the events we care about - https://developer.github.com/v3/activity/events/types
@@ -38,9 +40,20 @@ var github = function() {
             gitHelper.clone(function(err, cloneFolder) {
                 maven.config(data.repository, cloneFolder, function() {
                     winston.info('pom file configured and placed in repo.');
-                    git.add('pom.xml').commit('Setup maven pom.xml file.').push(function(err) {
-                       if (err) winston.error(err);
-                        winston.info('Added pom file, committed, and pushed.');
+                    git.add('pom.xml', function(err) {
+                        if (err) winston.error(err);
+                        git.commit('Setup maven pom.xml file.', function(err) {
+                            if (err) { /* most likely pom file exists. */ }
+                            git.push(function(err) {
+                                if (err) winston.error(err);
+                                winston.info('Added pom file, committed, and pushed.');
+                                gitHelper.delete();
+                                winston.info('Deleted repository.');
+
+                                // now we want to go and create the job on Jenkins
+                                jenkins.createJob(data.repository);
+                            });
+                        });
                     });
                 });
 
