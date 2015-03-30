@@ -30,7 +30,7 @@ var jenkinsHelper = function() {
 
     var processRepoName = function(repoName) {
         // ["slogo_team02", "slogo", "team", "02"]
-        var repoParts = repoName.match(/([a-z]+)_([a-z]+)(\d+)?/);
+        var repoParts = repoName.match(/([a-z]+)_([a-z]+)(\d+)?/i);
         var projectName = repoParts[1].capitalize();
         var teamName = repoParts[2].capitalize();
         teamName = repoParts[3] ? teamName + ' ' + repoParts[3] : teamName;
