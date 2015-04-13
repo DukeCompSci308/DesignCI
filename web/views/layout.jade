@@ -1,17 +1,32 @@
 doctype html
 html(lang='en')
-  head
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width')
-    title= title
-    block css
-      link(rel='stylesheet', href='/css/style.css')
-      link(rek='stylesheet' href='/components/dist/css/bootstrap.min.css')
-      link(rek='stylesheet' href='/components/dist/css/bootstrap-theme.min.css')
-    block js
-      script(src='http://localhost:35729/livereload.js')
-  body
-    block content
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width')
+        title= title
+        block css
+            link(rel='stylesheet', href='/css/style.css')
+            link(rel='stylesheet' href='/components/dist/css/bootstrap.min.css')
+            link(rel='stylesheet' href='/components/font-awesome/css/font-awesome.min.css')
+            //link(rek='stylesheet' href='/components/dist/css/bootstrap-theme.min.css')
+            link(rel='stylesheet' href='//bootswatch.com/flatly/bootstrap.min.css')
+        block js
+            script(src='http://localhost:35729/livereload.js')
+    body
 
-    script(src='/components/jquery/dist/jquery.min.js')
-    script(src='/components/bootstrap/dist/js/bootstrap.min.js')
+        nav.navbar.navbar-inverse.navbar-fixed-top
+            div.container-fluid
+                div.navbar-header
+                    a.navbar-brand(href='#') #{title}
+                #navbar.navbar-collapse.collapse
+                    ul.nav.navbar-nav.navbar-right
+                        li(role='presentation')
+                            a(href='#')
+                                i.fa.fa-github
+                                span= user.name
+                        li(role='presentation')
+                        li(role='presentation')
+        div.container
+            block content
+        script(src='/components/jquery/dist/jquery.min.js')
+        script(src='/components/bootstrap/dist/js/bootstrap.min.js')
