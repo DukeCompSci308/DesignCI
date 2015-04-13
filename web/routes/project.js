@@ -18,7 +18,7 @@ router.get('/demo', function(req, res) {
         project: {
           url: 'http://design.cs.duke.edu/job/Fall%202014/job/Slogo/job/Team%2003/',
           github: 'https://github.com/duke-compsci308-spring2015/slogo_team03',
-          building: true,
+          building: false,
           health: {
             description: "Build stability: No recent builds failed.",
             score: 100

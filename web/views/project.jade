@@ -15,24 +15,34 @@ block content
         div.alert.alert-danger(role='alert')
             i.fa.fa-exclamation-triangle
             |  Your project is not building. Look at the error logs.
-
+    .row
+        .col-sm12
+            h3 Build Info
+            div
+                div.col-sm-4
+                    h4 Last Successful Build:
+                div.col-sm-8
+                    a(href='#{project.lastSuccessfulBuild.url}') View
     div.row
         div.col-sm-3
             .well.text-center
                 a(href='#{project.github}')
                     i.fa.fa-github-square.fa-5x
                     h4 GitHub Repo
+                p Project source code.
 
         div.col-sm-3
             .well.text-center
                 a(href='#{project.github}')
                     img(src='/img/jenkins.png' style='width: 75px')
                     h4 Jenkins
+                p View the project information on Jenkins, a Continuous Integration server.
         div.col-sm-3
             .well.text-center
                 a(href='#{project.github}').vertical-center
                     img(src='/img/sonarqube.png' style='width: 75px')
                     h4 SonarQube
+                p Analyzes your code and indicates where problems lie.
         div.col-sm-3
             p Data
 block endjs
