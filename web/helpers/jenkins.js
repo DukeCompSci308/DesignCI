@@ -41,6 +41,25 @@ var jenkinsHelper = function() {
         };
     };
 
+    var getJobs = function(callback) {
+        var response = true;
+        while (response) {
+            jenkins.all_jobs(function(err, data) {
+                if (!err) {
+                    for (var job in data) {
+                        loadJobInfo(job, function(data) {
+                            job.children = data;
+                        });
+                    }
+                }
+            });
+        }
+    };
+
+    var loadJobInfo = function(parent, callback) {
+
+    };
+
     var createJob = function(repo) {
         var semester = processOrganizationName(repo.owner.login);
         var project = processRepoName(repo.name);
@@ -62,7 +81,8 @@ var jenkinsHelper = function() {
 
     return {
         api: jenkins,
-        createJob: createJob
+        createJob: createJob,
+        getJobs: getJobs
     }
 };
 
