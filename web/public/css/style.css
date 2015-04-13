@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.vertical-center {
+  min-height: 100%; !important;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; !important /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
