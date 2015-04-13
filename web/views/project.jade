@@ -29,7 +29,12 @@ block content
                     img(src='/img/jenkins.png' style='width: 75px')
                     h4 Jenkins
         div.col-sm-3
-            p Data
+            .well.text-center
+                a(href='#{project.github}').-align-center
+                    img(src='/img/sonarqube.png' style='width: 75px')
+                    h4 SonarQube
         div.col-sm-3
             p Data
+block endjs
+    script(src='/js/app.js')
 
