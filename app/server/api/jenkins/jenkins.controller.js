@@ -10,6 +10,27 @@ var buildAPIURL = function(semester, job) {
   return url;
 };
 
+var getSonarURL = function(jenkinsJob, callback) {
+  jenkins.api.job.get(jenkinsJob, {tree: 'builds[actions[url]]'}, function(err, sonar) {
+    if (err) throw err;
+
+    for (var i = 0; i < sonar.builds.length; i++) {
+      var build = sonar.builds[i];
+      if (build) {
+        for (var j = 0; j < build.actions.length; j++) {
+          var action = build.actions[j];
+          if (action) {
+            if (action.url) {
+              return callback(err, action.url);
+            }
+          }
+        }
+      }
+    }
+    callback(err, '');
+  });
+};
+
 exports.index = function(req, res) {
   res.json([]);
 };
@@ -20,11 +41,14 @@ exports.job = function(req, res) {
     if (err || !data) {
       res.status(404).json({msg: 'No job with that name.'});
     }
-    if (err) throw err;
-    res.json({
-      info: {semester: req.semesterName, job: req.jobURL},
-      jenkins: data
-    })
+
+    getSonarURL(jenkinsJob, function(err, sonar) {
+      res.json({
+        info: {semester: req.semesterName, job: req.jobURL},
+        jenkins: data,
+        sonarqube: sonar
+      });
+    });
   });
 };
 
