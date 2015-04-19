@@ -17,7 +17,7 @@ var jenkinsHelper = function() {
     var processOrganizationName = function(org) {
         var parts = org.split('-');
 
-        var semesterSection  = parts[2];
+        var semesterSection = parts[parts.length - 1];
         var semester =  semesterSection.match(/([a-z]+)([0-9]+)/);
         var year = semester[2];
         semester = semester[1];
@@ -82,7 +82,9 @@ var jenkinsHelper = function() {
     return {
         api: jenkins,
         createJob: createJob,
-        getJobs: getJobs
+        getJobs: getJobs,
+        parseRepoName: processRepoName,
+        getSemester: processOrganizationName
     }
 };
 
