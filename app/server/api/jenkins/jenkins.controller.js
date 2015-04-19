@@ -9,8 +9,6 @@ var buildAPIURL = function(semester, job) {
   return url;
 };
 
-http://design.cs.duke.edu/job/Spring%202015/job/Voogasalad/job/RDatGV/api/
-
 exports.index = function(req, res) {
   res.json([]);
 };
