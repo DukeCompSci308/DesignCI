@@ -10,9 +10,12 @@ String.prototype.capitalize = function () {
 };
 
 var jenkinsHelper = function() {
+
     var jenkinsapi = require('jenkins-api');
     var connection = "http://" + config.jenkins.username + ":" + config.jenkins.api_token + "@" + config.jenkins.server;
     var jenkins = jenkinsapi.init(connection);
+
+    var jenkinsAPI = require('jenkins')(connection);
 
     var processOrganizationName = function(org) {
         var parts = org.split('-');
@@ -80,7 +83,7 @@ var jenkinsHelper = function() {
     };
 
     return {
-        api: require('jenkins')(connection),
+        api: jenkinsAPI,
         createJob: createJob,
         getJobs: getJobs,
         parseRepoName: processRepoName,

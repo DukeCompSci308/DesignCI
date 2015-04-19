@@ -5,7 +5,7 @@ var _ = require('lodash');
 var jenkins = require('../../helpers/jenkins');
 
 var buildAPIURL = function(semester, job) {
-  var url = encodeURIComponent(semester) + '/' + encodeURIComponent(job.project) + '/' + encodeURIComponent(job.team);
+  var url = semester + '/' + job.project + '/' + encodeURIComponent(job.team);
   return url;
 };
 
