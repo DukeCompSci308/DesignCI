@@ -80,7 +80,7 @@ var jenkinsHelper = function() {
     };
 
     return {
-        api: jenkins,
+        api: require('jenkins')(connection),
         createJob: createJob,
         getJobs: getJobs,
         parseRepoName: processRepoName,
