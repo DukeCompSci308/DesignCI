@@ -3,7 +3,7 @@ var express = require('express');
 var winston = require('./logger');
 var verify = require('./verify');
 
-var config = require('../config.json');
+var config = require('../config/jenkins.js');
 
 String.prototype.capitalize = function () {
     return this && this[0].toUpperCase() + this.slice(1);
