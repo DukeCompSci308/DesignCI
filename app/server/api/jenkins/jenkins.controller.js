@@ -16,12 +16,15 @@ exports.index = function(req, res) {
 
 exports.job = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
-  console.log(jenkinsJob);
-  jenkins.api.job.exists(jenkinsJob, function(err, exists) {
-    if (err || !exists) {
+  jenkins.api.job.get(jenkinsJob, function(err, data) {
+    if (err || !data) {
       res.status(404).json({msg: 'No job with that name.'});
     }
-    res.json({semester: req.semesterName, job: req.jobURL});
+    if (err) throw err;
+    res.json({
+      info: {semester: req.semesterName, job: req.jobURL},
+      jenkins: data
+    })
   });
 };
 
