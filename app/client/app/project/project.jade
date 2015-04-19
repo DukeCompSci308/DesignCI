@@ -1,2 +1,55 @@
-.col-md-12
-    | This is the project view.
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  .row
+    .col-lg-12
+      .col-sm-4
+        h1 #{title}
+      .col-sm-8
+        h2.pull-right.text-muted
+          a(href='{{project.url}}' target='_blank') project url
+    //if project.building == true
+      div.alert.alert-success(role='alert')
+        i.fa.fa-smile-o
+        |  Your project is building successfully!
+    //else
+      div.alert.alert-danger(role='alert')
+        i.fa.fa-exclamation-triangle
+        |  Your project is not building. Look at the error logs.
+    .row
+      .col-sm12
+        h3 Build Info
+        div
+          div.col-sm-4
+            h4 Last Successful Build:
+          div.col-sm-8
+            a(href='{{project.lastSuccessfulBuild.url}}') View
+    div.row
+      div.col-sm-3
+        .well.text-center
+          a(href='{{project.github}}')
+            i.fa.fa-github-square.fa-5x
+            h4 GitHub Repo
+          p Project source code.
+
+      div.col-sm-3
+        .well.text-center
+          a(href='{{project.github}}')
+            img(src='assets/images/jenkins.png' style='width: 75px')
+            h4 Jenkins
+          p View the project information on Jenkins, a Continuous Integration server.
+      div.col-sm-3
+        .well.text-center
+          a(href='{{project.github}').vertical-center
+            img(src='assets/images/sonarqube.png' style='width: 75px')
+            h4 SonarQube
+          p Analyzes your code and indicates where problems lie.
+      div.col-sm-3
+        p Data
+  footer.footer
+    .container
+      p
+        | Angular Fullstack v2.0.13
+        = ' | '
+        a(href='https://twitter.com/tyhenkel') @tyhenkel
+        = ' | '
+        a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues
