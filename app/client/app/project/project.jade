@@ -49,7 +49,11 @@ div(ng-include='"components/navbar/navbar.html"')
           h4 SonarQube
         p Analyzes your code and indicates where problems lie.
     div.col-sm-3
-      p Data
+      .well.text-center
+        a(href='{{project.sonarqube}}').vertical-center
+          i.fa.fa-book.fa-5x
+          h4 Documentation
+        p Documentation for your project based on JavaDoc comments and class hierarchies.
   footer.footer
     .container
       p
@@ -58,3 +62,11 @@ div(ng-include='"components/navbar/navbar.html"')
         a(href='https://twitter.com/tadimsky') @Tadimsky
         = ' | '
         a(href='https://github.com/DukeCompSci308/DesignCI/issues?state=open') Issues
+script.
+  $(document).ready(function () {
+    var heights = $(".well").map(function () {
+        return $(this).height();
+      }).get(),
+      maxHeight = Math.max.apply(null, heights);
+    $(".well").height(maxHeight + 10);
+  });
