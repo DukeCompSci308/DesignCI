@@ -5,8 +5,10 @@ div(ng-include='"components/navbar/navbar.html"')
       .col-sm-6
         h1 Hello {{project.info.job.project}} {{project.info.job.team}}!
       .col-sm-6
-        //h2.pull-right.text-muted
-          a(href='{{project.jenkins.url}}' target='_blank') project url
+        h2.pull-right.text-muted
+          a(href='{{project.jenkins.url}}' target='_blank')
+            i.fa.fa-github-square
+            | &nbsp;repo
   div.alert.alert-success(role='alert', ng-show='project.building')
     i.fa.fa-smile-o
     |  Your project is building successfully!
@@ -32,9 +34,9 @@ div(ng-include='"components/navbar/navbar.html"')
     div.col-sm-3
       .well.text-center
         a(href='{{project.github}}')
-          i.fa.fa-github-square.fa-5x
-          h4 GitHub Repo
-        p Project source code.
+          i.fa.fa-users.fa-5x
+          h4 Contribution Graphs
+        p Shows the number of commits per person, and frequency of contribution.
 
     div.col-sm-3
       .well.text-center
