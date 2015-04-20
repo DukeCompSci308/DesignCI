@@ -7,13 +7,13 @@ div(ng-include='"components/navbar/navbar.html"')
       .col-sm-6
         //h2.pull-right.text-muted
           a(href='{{project.jenkins.url}}' target='_blank') project url
-  div.alert.alert-success(role='alert', ng-show='project.jenkins.color == "blue"')
+  div.alert.alert-success(role='alert', ng-show='project.building')
     i.fa.fa-smile-o
     |  Your project is building successfully!
-  div.alert.alert-danger(role='alert', ng-hide='project.jenkins.color == "blue"')
+  div.alert.alert-danger(role='alert', ng-hide='project.building')
     i.fa.fa-exclamation-triangle
     span Your project is not building. Please look at the&nbsp;
-    a(href="{{project.jenkins.lastBuild.url}}/console") error logs.
+    a(href="{{project.jenkins.lastCompletedBuild.url}}/console") error logs.
   .row
     .col-lg-12
       .col-lg-12
@@ -23,7 +23,7 @@ div(ng-include='"components/navbar/navbar.html"')
             build-info(build-name='Last Successful Build', build-details="project.jenkins.lastSuccessfulBuild")
         .row(ng-show='project.jenkins.lastSuccessfulBuild.number != project.jenkins.lastBuild.number')
           div.col-sm-12
-            build-info(build-name='Last Build', build-details="project.jenkins.lastBuild")
+            build-info(build-name='Last Build', build-details="project.jenkins.lastCompletedBuild")
   .row
     .col-lg-12
       .col-lg-12
