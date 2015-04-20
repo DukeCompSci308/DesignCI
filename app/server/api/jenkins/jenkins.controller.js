@@ -37,7 +37,7 @@ exports.index = function(req, res) {
 
 exports.job = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
-  jenkins.api.job.get(jenkinsJob, {tree: 'description,displayName,url,buildable,color,healthReport[*],lastBuild[*],lastSuccessfulBuild[*]'}, function(err, data) {
+  jenkins.api.job.get(jenkinsJob, {tree: 'description,displayName,url,inQueue,buildable,color,healthReport[*],lastBuild[*],lastCompletedBuild[*],lastSuccessfulBuild[*]'}, function(err, data) {
     if (err || !data) {
       res.status(404).json({msg: 'No job with that name.'});
     }
@@ -54,11 +54,11 @@ exports.job = function(req, res) {
 
 exports.metrics = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
-  jenkins.api.job.get(jenkinsJob, {tree: 'lastBuild[number],lastSuccessfulBuild[number]'}, function(err, data) {
+  jenkins.api.job.get(jenkinsJob, {tree: 'lastCompletedBuild[number],lastSuccessfulBuild[number]'}, function(err, data) {
     if (err || !data) {
       return res.status(404).json({msg: 'No job with that name.'});
     }
-    var build = data.lastBuild.number;
+    var build = data.lastCompletedBuild.number;
 
     jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
       if (err) {
