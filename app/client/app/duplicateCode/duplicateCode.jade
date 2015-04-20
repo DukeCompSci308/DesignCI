@@ -1,5 +1,6 @@
-div
-  h3 Duplicate Code: {{metrics.numberOfWarnings}} total
+div(ng-if="metrics")
+  h3 Duplicate Code: {{metrics.numberOfWarnings}}&nbsp;
+    a(href='{{metrics.referenceBuild.url}}/dryResult') total blocks
   div.alert.alert-danger(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
     i.fa.fa-exclamation-triangle
     span &nbsp;High Priority: {{metrics.numberOfHighPriorityWarnings}}
