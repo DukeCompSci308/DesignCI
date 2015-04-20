@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/buildInfo/buildInfo.css">
+      <link rel="stylesheet" href="app/duplicateCode/duplicateCode.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/project/project.css">
       <!-- endinjector -->
@@ -58,12 +60,16 @@
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/angular-moment/angular-moment.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/buildInfo/buildInfo.directive.js"></script>
+          <script src="app/duplicateCode/duplicateCode.directive.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/project/project.controller.js"></script>
