@@ -62,9 +62,9 @@ exports.metrics = function(req, res) {
 
     jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
       if (err) {
-        // there is no metric information for this
+        data = {};// there is no metric information for this
       }
-      return res.json(data);
+      return res.json({dry: data});
     });
   });
 };
