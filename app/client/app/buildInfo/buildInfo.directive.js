@@ -10,11 +10,6 @@ angular.module('appApp')
         name: '@buildName'
       },
       link: function (scope, element, attrs) {
-        console.log(scope);
-        scope.$watch('build', function(newValue, oldValue) {
-          if (newValue)
-            console.log(newValue);
-        }, true);
       }
     };
   });

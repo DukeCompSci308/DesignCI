@@ -10,9 +10,10 @@ div(ng-include='"components/navbar/navbar.html"')
   div.alert.alert-success(role='alert', ng-show='project.jenkins.color == "blue"')
     i.fa.fa-smile-o
     |  Your project is building successfully!
-  div.alert.alert-danger(role='alert', ng-hide='project.jenkins.color == "blue"')
+  div.alert.alert-danger(role='alert', ng-hide='project.jenkins.color != "blue"')
     i.fa.fa-exclamation-triangle
-    |  Your project is not building. Please look at the error logs.
+    span Your project is not building. Please look at the&nbsp;
+    a(href="{{project.jenkins.lastBuild.url}}/console") error logs.
   .row
     .col-lg-12
       .col-lg-12
