@@ -37,7 +37,7 @@ exports.index = function(req, res) {
 
 exports.job = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
-  jenkins.api.job.get(jenkinsJob, function(err, data) {
+  jenkins.api.job.get(jenkinsJob, {tree: 'description,displayName,url,buildable,color,healthReport[*],lastBuild[*],lastSuccessfulBuild[*]'}, function(err, data) {
     if (err || !data) {
       res.status(404).json({msg: 'No job with that name.'});
     }
