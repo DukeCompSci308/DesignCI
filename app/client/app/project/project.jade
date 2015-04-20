@@ -3,14 +3,14 @@ div(ng-include='"components/navbar/navbar.html"')
   .row
     .col-lg-12
       .col-sm-4
-        h1 Hello: {{title}}
+        h1 Hello: {{projectName}}
       .col-sm-8
         h2.pull-right.text-muted
-          a(href='{{project.url}}' target='_blank') project url
-  div.alert.alert-success(role='alert', ng-show='project.building')
+          a(href='{{project.jenkins.url}}' target='_blank') project url
+  div.alert.alert-success(role='alert', ng-show='project.jenkins.color == "blue"')
     i.fa.fa-smile-o
     |  Your project is building successfully!
-  div.alert.alert-danger(role='alert', ng-hide='project.building')
+  div.alert.alert-danger(role='alert', ng-hide='project.jenkins.color == "blue"')
     i.fa.fa-exclamation-triangle
     |  Your project is not building. Please look at the error logs.
   .row
@@ -20,7 +20,7 @@ div(ng-include='"components/navbar/navbar.html"')
         div.col-sm-4
           h4 Last Successful Build:
         div.col-sm-8
-          a(href='{{project.lastSuccessfulBuild.url}}') View
+          a(href='{{project.jenkins.lastSuccessfulBuild.url}}') View
   div.row
     div.col-sm-3
       .well.text-center
@@ -31,13 +31,13 @@ div(ng-include='"components/navbar/navbar.html"')
 
     div.col-sm-3
       .well.text-center
-        a(href='{{project.github}}')
+        a(href='{{project.jenkins.url}}')
           img(src='assets/images/jenkins.png' style='width: 75px')
           h4 Jenkins
         p View the project information on Jenkins, a Continuous Integration server.
     div.col-sm-3
       .well.text-center
-        a(href='{{project.github}}').vertical-center
+        a(href='{{project.sonarqube}}').vertical-center
           img(src='assets/images/sonarqube.png' style='width: 75px')
           h4 SonarQube
         p Analyzes your code and indicates where problems lie.
