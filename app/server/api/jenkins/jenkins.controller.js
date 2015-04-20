@@ -37,10 +37,13 @@ exports.index = function(req, res) {
 
 exports.job = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
-  jenkins.api.job.get(jenkinsJob, {tree: 'description,displayName,url,inQueue,buildable,color,healthReport[*],lastBuild[*],lastCompletedBuild[*],lastSuccessfulBuild[*]'}, function(err, data) {
+  jenkins.api.job.get(jenkinsJob, {tree: 'description,displayName,url,inQueue,buildable,color,healthReport[*],lastBuild[*],lastCompletedBuild[*],lastSuccessfulBuild[*],scm[userRemoteConfigs[url]]'}, function(err, data) {
     if (err || !data) {
       res.status(404).json({msg: 'No job with that name.'});
     }
+
+    var sshURL = data.scm.userRemoteConfigs.url;
+    data.scm.github = "https://www.github.com/" + sshURL.substring(sshURL.indexOf(":") + 1);
 
     getSonarURL(jenkinsJob, function(err, sonar) {
       res.json({
