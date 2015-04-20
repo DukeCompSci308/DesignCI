@@ -10,7 +10,7 @@ div(ng-include='"components/navbar/navbar.html"')
   div.alert.alert-success(role='alert', ng-show='project.jenkins.color == "blue"')
     i.fa.fa-smile-o
     |  Your project is building successfully!
-  div.alert.alert-danger(role='alert', ng-hide='project.jenkins.color != "blue"')
+  div.alert.alert-danger(role='alert', ng-hide='project.jenkins.color == "blue"')
     i.fa.fa-exclamation-triangle
     span Your project is not building. Please look at the&nbsp;
     a(href="{{project.jenkins.lastBuild.url}}/console") error logs.
@@ -18,7 +18,6 @@ div(ng-include='"components/navbar/navbar.html"')
     .col-lg-12
       .col-lg-12
         h3 Build Info
-        //div(duplicate-code="")
         .row
           div.col-sm-12
             build-info(build-name='Last Successful Build', build-details="project.jenkins.lastSuccessfulBuild")
@@ -27,6 +26,7 @@ div(ng-include='"components/navbar/navbar.html"')
             build-info(build-name='Last Build', build-details="project.jenkins.lastBuild")
   .row
     br
+    duplicate-code(metrics="metrics.jenkins.dry")
   .row
     div.col-sm-3
       .well.text-center
