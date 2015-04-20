@@ -56,7 +56,7 @@ exports.metrics = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
   jenkins.api.job.get(jenkinsJob, {tree: 'lastBuild[number],lastSuccessfulBuild[number]'}, function(err, data) {
     if (err || !data) {
-      res.status(404).json({msg: 'No job with that name.'});
+      return res.status(404).json({msg: 'No job with that name.'});
     }
     var build = data.lastBuild.number;
 
@@ -76,6 +76,10 @@ exports.jobParse = function(req,res,next,job) {
 };
 
 exports.semesterParse = function(req,res,next,semester) {
+  if (semester == 'default') {
+    semester = 'spring2015';
+    req.semester = 'spring2015'
+  }
   console.log('Sem: ' + semester);
   req.semesterName = jenkins.getSemester(semester);
   next();
