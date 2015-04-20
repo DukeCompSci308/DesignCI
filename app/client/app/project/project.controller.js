@@ -14,6 +14,8 @@ angular.module('appApp')
     $http.get(apiURL).success(function(data) {
       $scope.project = data;
       console.log(data);
+      $scope.project.building = $scope.project.jenkins.lastSuccessfulBuild.number == $scope.project.jenkins.lastCompletedBuild.number;
+
     });
 
     $http.get(apiURL + '/metrics').success(function(data) {
