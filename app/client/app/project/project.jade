@@ -2,10 +2,10 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
     .col-lg-12
-      .col-sm-4
-        h1 Hello: {{projectName}}
-      .col-sm-8
-        h2.pull-right.text-muted
+      .col-sm-6
+        h1 Hello {{project.info.job.project}} {{project.info.job.team}}!
+      .col-sm-6
+        //h2.pull-right.text-muted
           a(href='{{project.jenkins.url}}' target='_blank') project url
   div.alert.alert-success(role='alert', ng-show='project.jenkins.color == "blue"')
     i.fa.fa-smile-o
@@ -14,14 +14,19 @@ div(ng-include='"components/navbar/navbar.html"')
     i.fa.fa-exclamation-triangle
     |  Your project is not building. Please look at the error logs.
   .row
-    .col-sm12
-      h3 Build Info
-      div
-        div.col-sm-4
-          h4 Last Successful Build:
-        div.col-sm-8
-          a(href='{{project.jenkins.lastSuccessfulBuild.url}}') View
-  div.row
+    .col-lg-12
+      .col-lg-12
+        h3 Build Info
+        //div(duplicate-code="")
+        .row
+          div.col-sm-12
+            build-info(build-name='Last Successful Build', build-details="project.jenkins.lastSuccessfulBuild")
+        .row(ng-show='project.jenkins.lastSuccessfulBuild.number != project.jenkins.lastBuild.number')
+          div.col-sm-12
+            build-info(build-name='Last Build', build-details="project.jenkins.lastBuild")
+  .row
+    br
+  .row
     div.col-sm-3
       .well.text-center
         a(href='{{project.github}}')
@@ -46,8 +51,8 @@ div(ng-include='"components/navbar/navbar.html"')
   footer.footer
     .container
       p
-        | Angular Fullstack v2.0.13
+        | Duke Design CI
         = ' | '
-        a(href='https://twitter.com/tyhenkel') @tyhenkel
+        a(href='https://twitter.com/tadimsky') @Tadimsky
         = ' | '
-        a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues
+        a(href='https://github.com/DukeCompSci308/DesignCI/issues?state=open') Issues
