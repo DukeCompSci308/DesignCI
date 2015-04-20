@@ -52,6 +52,23 @@ exports.job = function(req, res) {
   });
 };
 
+exports.metrics = function(req, res) {
+  var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
+  jenkins.api.job.get(jenkinsJob, {tree: 'lastBuild[number],lastSuccessfulBuild[number]'}, function(err, data) {
+    if (err || !data) {
+      res.status(404).json({msg: 'No job with that name.'});
+    }
+    var build = data.lastBuild.number;
+
+    jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
+      if (err) {
+        // there is no metric information for this
+      }
+      return res.json(data);
+    });
+  });
+};
+
 exports.jobParse = function(req,res,next,job) {
   console.log('Job: ' + job);
   req.jobURL = jenkins.parseRepoName(job);

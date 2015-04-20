@@ -13,6 +13,8 @@ router.get('/', controller.index);
 
 router.get('/:semester/:job', controller.job);
 
+router.get('/:semester/:job/metrics', controller.metrics);
+
 router.get('/:job', function(req, res) {
   res.redirect('spring2015/' + req.params.job);
 });
