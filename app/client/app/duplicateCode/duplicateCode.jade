@@ -1,2 +1,11 @@
-div this is the duplicateCode directive
-div {{metrics}}
+div
+  h3 Duplicate Code: {{metrics.numberOfWarnings}} total
+  div.alert.alert-danger(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
+    i.fa.fa-exclamation-triangle
+    span &nbsp;High Priority: {{metrics.numberOfHighPriorityWarnings}}
+  div.alert.alert-warning(role='alert', ng-show="metrics.numberOfNormalPriorityWarnings > 0")
+    i.fa.fa-exclamation-triangle
+    span &nbsp;Normal Priority: {{metrics.numberOfNormalPriorityWarnings}}
+  div.alert.alert-info(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
+    i.fa.fa-exclamation-triangle
+    span &nbsp;Low Priority: {{metrics.numberOfLowPriorityWarnings}}
