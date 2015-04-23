@@ -30,6 +30,7 @@ div(ng-include='"components/navbar/navbar.html"')
     .col-lg-12
       .col-lg-12
         duplicate-code(metrics="metrics.jenkins.dry")
+
   .row
     div.col-sm-3
       .well.text-center
@@ -42,20 +43,20 @@ div(ng-include='"components/navbar/navbar.html"')
       .well.text-center
         a(href='{{project.jenkins.url}}')
           img(src='assets/images/jenkins.png' style='width: 75px')
-          h4 Jenkins
-        p View the project information on Jenkins, a Continuous Integration server.
+          h4 Build Info
+        p See the status of your project, view duplicated code, and more.
     div.col-sm-3
       .well.text-center
         a(href='{{project.sonarqube}}').vertical-center
           img(src='assets/images/sonarqube.png' style='width: 75px')
-          h4 SonarQube
-        p Analyzes your code and indicates where problems lie.
+          h4 Code Quality
+        p View information, problems, and suggestions about your code.
     div.col-sm-3
       .well.text-center
         a(href='{{project.sonarqube}}').vertical-center
           i.fa.fa-book.fa-5x
           h4 Documentation
-        p Documentation for your project based on JavaDoc comments and class hierarchies.
+        p View documentation for your project based on JavaDoc comments and class hierarchies.
   footer.footer
     .container
       p
