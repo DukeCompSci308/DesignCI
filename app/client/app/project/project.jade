@@ -27,10 +27,12 @@ div(ng-include='"components/navbar/navbar.html"')
           .row(ng-show='project.jenkins.lastSuccessfulBuild.number != project.jenkins.lastBuild.number')
             div.col-sm-12
               build-info(build-name='Last Build', build-details="project.jenkins.lastCompletedBuild")
+    .col-lg-6
+      sonarqube-metrics(metrics="metrics.sonarmetrics")
+
   .row
     .col-lg-12
-      duplicate-code(metrics="metrics.jenkins.dry")
-
+      duplicate-code(metrics="metrics.dry")
   .row
     div.col-sm-3
       .well.text-center
