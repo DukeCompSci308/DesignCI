@@ -5,6 +5,8 @@ var _ = require('lodash');
 var jenkins = require('../../helpers/jenkins');
 var sonarqube = require('../../helpers/sonarqube');
 
+var async = require('async');
+
 var buildAPIURL = function(semester, job) {
   // hack to get around the jenkins api package
   var url = semester + '/' + job.project + '/' + encodeURIComponent(job.team);
@@ -64,11 +66,24 @@ exports.metrics = function(req, res) {
     }
     var build = data.lastCompletedBuild.number;
 
-    jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
-      if (err) {
-        data = {};// there is no metric information for this
+    var response = {};
+
+    async.parallel({
+      dry: function (callback) {
+        jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
+          if (err) {
+            data = {};// there is no metric information for this
+          }
+          callback(null, data);
+        });
+      },
+      sonarmetrics: function(callback) {
+        sonarqube.metrics('duke-compsci308-spring2015.voogasalad_ScrollingDeep:voogasalad_ScrollingDeep', function(err, data) {
+          callback(null, data);
+        });
       }
-      return res.json({dry: data});
+    }, function(err, results) {
+      return res.json(results);
     });
   });
 };
