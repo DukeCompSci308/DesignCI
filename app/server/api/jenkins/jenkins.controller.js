@@ -39,7 +39,7 @@ exports.job = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
   jenkins.api.job.get(jenkinsJob, {tree: 'description,displayName,url,inQueue,buildable,color,healthReport[*],lastBuild[*],lastCompletedBuild[*],lastSuccessfulBuild[*],scm[userRemoteConfigs[url]]'}, function(err, data) {
     if (err || !data) {
-      res.status(404).json({msg: 'No job with that name.'});
+      return res.status(404).json({msg: 'No project with that name.'});
     }
 
     var sshURL = data.scm.userRemoteConfigs[0].url;
@@ -59,7 +59,7 @@ exports.metrics = function(req, res) {
   var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
   jenkins.api.job.get(jenkinsJob, {tree: 'lastCompletedBuild[number],lastSuccessfulBuild[number]'}, function(err, data) {
     if (err || !data) {
-      return res.status(404).json({msg: 'No job with that name.'});
+      return res.status(404).json({msg: 'No project with that name.'});
     }
     var build = data.lastCompletedBuild.number;
 
