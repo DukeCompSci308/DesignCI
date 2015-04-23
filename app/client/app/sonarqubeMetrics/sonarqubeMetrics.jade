@@ -5,18 +5,18 @@
       .col-lg-4
         .panel.panel-info.panel
           .panel-body
-            h2 1000
+            h2 {{metrics.metrics.ncloc.formattedValue}}
             h5
               small Lines of Code
       .col-lg-4
         .panel.panel-info
           .panel-body
-            h2 528
+            h2 {{metrics.metrics.public_api.formattedValue}}
             h5
               small Public API Methods
       .col-lg-4
         .panel.panel-info
           .panel-body
-            h2 7.7
+            h2 {{metrics.metrics.class_complexity.formattedValue}}
               h5
                 small Class Complexity
