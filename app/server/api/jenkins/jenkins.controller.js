@@ -66,8 +66,6 @@ exports.metrics = function(req, res) {
     }
     var build = data.lastCompletedBuild.number;
 
-    var response = {};
-
     getSonarURL(jenkinsJob, function(err, sonar) {
       var sonarKey = sonar.substr(sonar.lastIndexOf('/') + 1);
 

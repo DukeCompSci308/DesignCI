@@ -43,7 +43,27 @@ var sonarqube = function() {
           }
       },
         function(error, response, body) {
-          callback(error, JSON.parse(body)[0]);
+          // let's parse this info coz it sucks
+          if (error) {
+            return callback(error, {});
+          }
+          var parsed = JSON.parse(body);
+          // get the first result
+          parsed = parsed[0];
+
+          metricsData = {};
+
+
+          if (parsed.hasOwnProperty('msr')) {
+            for (var prop in parsed.msr) {
+              var info = parsed.msr[prop];
+              metricsData[info.key] = { value: info.val, formattedValue: info.frmt_val };
+            }
+          }
+
+          parsed.metrics = metricsData;
+
+          return callback(error, parsed);
       });
     },
     test: function() {
