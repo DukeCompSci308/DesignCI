@@ -3,6 +3,7 @@
 var _ = require('lodash');
 
 var jenkins = require('../../helpers/jenkins');
+var sonarqube = require('../../helpers/sonarqube');
 
 var buildAPIURL = function(semester, job) {
   // hack to get around the jenkins api package
