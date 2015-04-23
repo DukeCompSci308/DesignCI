@@ -68,22 +68,26 @@ exports.metrics = function(req, res) {
 
     var response = {};
 
-    async.parallel({
-      dry: function (callback) {
-        jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
-          if (err) {
-            data = {};// there is no metric information for this
+    getSonarURL(jenkinsJob, function(err, sonar) {
+      var sonarKey = sonar.substr(sonar.lastIndexOf('/') + 1);
+
+        async.parallel({
+          dry: function (callback) {
+            jenkins.api.build.get(jenkinsJob, build + '/dryResult', function(err, data) {
+              if (err) {
+                data = {};// there is no metric information for this
+              }
+              callback(null, data);
+            });
+          },
+          sonarmetrics: function(callback) {
+            sonarqube.metrics(sonarKey, function(err, data) {
+              callback(null, data);
+            });
           }
-          callback(null, data);
+        }, function(err, results) {
+          return res.json(results);
         });
-      },
-      sonarmetrics: function(callback) {
-        sonarqube.metrics('duke-compsci308-spring2015.voogasalad_ScrollingDeep:voogasalad_ScrollingDeep', function(err, data) {
-          callback(null, data);
-        });
-      }
-    }, function(err, results) {
-      return res.json(results);
     });
   });
 };
