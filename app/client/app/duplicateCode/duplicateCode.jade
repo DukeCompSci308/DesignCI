@@ -1,15 +1,17 @@
 div(ng-if="metrics")
-  h3 Duplicate Code: {{metrics.numberOfWarnings}}&nbsp;
-    a(href='{{metrics.referenceBuild.url}}/dryResult') total blocks
-  .col-lg-6
-    div.alert.alert-danger(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
-      i.fa.fa-exclamation-triangle
-      span &nbsp;High Priority: {{metrics.numberOfHighPriorityWarnings}}
-    div.alert.alert-warning(role='alert', ng-show="metrics.numberOfNormalPriorityWarnings > 0")
-      i.fa.fa-exclamation-triangle
-      span &nbsp;Normal Priority: {{metrics.numberOfNormalPriorityWarnings}}
-    div.alert.alert-info(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
-      i.fa.fa-exclamation-triangle
-      span &nbsp;Low Priority: {{metrics.numberOfLowPriorityWarnings}}
-  .col-lg-6
-    img(src='{{metrics.referenceBuild.url}}../dry/trendGraph/png')
+  .panel.panel-danger
+    .panel-heading Duplicate Code: {{metrics.numberOfWarnings}}&nbsp;
+      a(href='{{metrics.referenceBuild.url}}/dryResult') total blocks
+    .panel-body
+      .col-lg-6
+        div.alert.alert-danger(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
+          i.fa.fa-exclamation-triangle
+          span &nbsp;High Priority: {{metrics.numberOfHighPriorityWarnings}}
+        div.alert.alert-warning(role='alert', ng-show="metrics.numberOfNormalPriorityWarnings > 0")
+          i.fa.fa-exclamation-triangle
+          span &nbsp;Normal Priority: {{metrics.numberOfNormalPriorityWarnings}}
+        div.alert.alert-info(role='alert', ng-show="metrics.numberOfHighPriorityWarnings > 0")
+          i.fa.fa-exclamation-triangle
+          span &nbsp;Low Priority: {{metrics.numberOfLowPriorityWarnings}}
+      .col-lg-6
+        img(src='{{metrics.referenceBuild.url}}../dry/trendGraph/png')
