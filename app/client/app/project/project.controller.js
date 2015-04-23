@@ -3,6 +3,7 @@
 angular.module('appApp')
   .controller('ProjectCtrl', function ($scope, $stateParams, $http) {
     $scope.message = 'Hello';
+    $scope.title = 'Hello';
 
     $scope.semesterName = $stateParams.semesterName ? $stateParams.semesterName : 'spring2015';
     $scope.projectName = $stateParams.projectName ? $stateParams.projectName : $stateParams.semesterName;
@@ -22,7 +23,7 @@ angular.module('appApp')
       });
 
     $http.get(apiURL + '/metrics').success(function(data) {
-      $scope.metrics.jenkins = data;
+      $scope.metrics = data;
       console.log(data);
     });
   });
