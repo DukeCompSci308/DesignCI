@@ -6,7 +6,7 @@ div(ng-include='"components/navbar/navbar.html"')
         h1 Hello {{project.info.job.project}} {{project.info.job.team}}!
       .col-sm-6
         h2.pull-right.text-muted
-          a(href='{{project.jenkins.url}}' target='_blank')
+          a(href='{{project.jenkins.scm.github}}' target='_blank')
             i.fa.fa-github-square
             | &nbsp;repo
   div.alert.alert-success(role='alert', ng-show='project.building')
@@ -33,7 +33,7 @@ div(ng-include='"components/navbar/navbar.html"')
   .row
     div.col-sm-3
       .well.text-center
-        a(href='{{project.github}}')
+        a(href='{{project.jenkins.scm.github}}/graphs')
           i.fa.fa-users.fa-5x
           h4 Contribution Graphs
         p Shows the number of commits per person, and frequency of contribution.

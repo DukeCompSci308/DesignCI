@@ -42,7 +42,7 @@ exports.job = function(req, res) {
       res.status(404).json({msg: 'No job with that name.'});
     }
 
-    var sshURL = data.scm.userRemoteConfigs.url;
+    var sshURL = data.scm.userRemoteConfigs[0].url;
     data.scm.github = "https://www.github.com/" + sshURL.substring(sshURL.indexOf(":") + 1);
 
     getSonarURL(jenkinsJob, function(err, sonar) {
