@@ -17,19 +17,19 @@ div(ng-include='"components/navbar/navbar.html"')
     span Your project is not building. Please look at the&nbsp;
     a(href="{{project.jenkins.lastCompletedBuild.url}}/console") error logs.
   .row
-    .col-lg-12
-      .col-lg-12
-        h3 Build Info
-        .row
-          div.col-sm-12
-            build-info(build-name='Last Successful Build', build-details="project.jenkins.lastSuccessfulBuild")
-        .row(ng-show='project.jenkins.lastSuccessfulBuild.number != project.jenkins.lastBuild.number')
-          div.col-sm-12
-            build-info(build-name='Last Build', build-details="project.jenkins.lastCompletedBuild")
+    .col-lg-6
+      .panel.panel-info
+        .panel-heading Build Info
+        .panel-body
+          .row
+            div.col-sm-12
+              build-info(build-name='Last Successful Build', build-details="project.jenkins.lastSuccessfulBuild")
+          .row(ng-show='project.jenkins.lastSuccessfulBuild.number != project.jenkins.lastBuild.number')
+            div.col-sm-12
+              build-info(build-name='Last Build', build-details="project.jenkins.lastCompletedBuild")
   .row
     .col-lg-12
-      .col-lg-12
-        duplicate-code(metrics="metrics.jenkins.dry")
+      duplicate-code(metrics="metrics.jenkins.dry")
 
   .row
     div.col-sm-3
