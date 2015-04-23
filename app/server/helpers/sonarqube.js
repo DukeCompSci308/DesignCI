@@ -39,7 +39,7 @@ var sonarqube = function() {
           url: '/resources/index',
           qs: {
             resource: project,
-            metrics: 'class_complexity,function_complexity,public_documented_api_density,violations,blocker_violations,critical_violations,ncloc,accessors,public_api'
+            metrics: 'class_complexity,function_complexity,public_documented_api_density,violations,blocker_violations,critical_violations,major_violations,ncloc,accessors,public_api'
           }
       },
         function(error, response, body) {
