@@ -1,8 +1,8 @@
-h4
-  .row
-    .col-lg-6
-      div.pull-left
-        span {{name}} (
-        a(href='{{build.url}}') \#{{build.number}}
-        span ):&nbsp
-      span.pull-left(am-time-ago="build.timestamp")
+.row
+  .col-lg-12
+    div.pull-left
+      span {{name}} (
+      a(href='{{build.url}}') \#{{build.number}}
+      span ):&nbsp
+    span.pull-left
+      small(am-time-ago="build.timestamp")
