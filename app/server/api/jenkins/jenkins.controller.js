@@ -43,7 +43,7 @@ exports.job = function(req, res) {
     }
 
     var sshURL = data.scm.userRemoteConfigs[0].url;
-    data.scm.github = "https://www.github.com/" + sshURL.substring(sshURL.indexOf(":") + 1);
+    data.scm.github = "https://www.github.com/" + sshURL.substring(sshURL.indexOf(":") + 1, sshURL.lastIndexOf('.'));
 
     getSonarURL(jenkinsJob, function(err, sonar) {
       res.json({
@@ -79,7 +79,7 @@ exports.jobParse = function(req,res,next,job) {
 };
 
 exports.semesterParse = function(req,res,next,semester) {
-  if (semester == 'default') {
+  if (semester === 'default') {
     semester = 'spring2015';
     req.semester = 'spring2015'
   }
