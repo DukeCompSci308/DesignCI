@@ -19,6 +19,7 @@ angular.module('appApp')
     })
       .error(function(er, status) {
         console.log(er);
+        $scope.error = er;
         console.log(status);
       });
 
