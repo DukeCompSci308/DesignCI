@@ -82,12 +82,18 @@ var jenkinsHelper = function() {
         });
     };
 
+    var authenticateURL = function(url) {
+      var path = require('url').parse(url);
+      return connection + path.path;
+    };
+
     return {
         api: jenkinsAPI,
         createJob: createJob,
         getJobs: getJobs,
         parseRepoName: processRepoName,
-        getSemester: processOrganizationName
+        getSemester: processOrganizationName,
+        authenticateURL : authenticateURL
     }
 };
 
