@@ -5,6 +5,8 @@ var _ = require('lodash');
 var jenkins = require('../../helpers/jenkins');
 var sonarqube = require('../../helpers/sonarqube');
 
+var request = require('request');
+
 var async = require('async');
 
 var buildAPIURL = function(semester, job) {
@@ -75,6 +77,7 @@ exports.metrics = function(req, res) {
               if (err) {
                 data = {};// there is no metric information for this
               }
+              data.trendGraph = req.originalUrl + '/dry';
               callback(null, data);
             });
           },
@@ -89,6 +92,18 @@ exports.metrics = function(req, res) {
     });
   });
 };
+
+exports.dryImage = function(req, res) {
+  var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
+  jenkins.api.job.get(jenkinsJob, {tree: 'url'}, function(err, data) {
+    if (err || !data) {
+      return res.status(404).json({msg: 'No project with that name.'});
+    }
+    var url = jenkins.authenticateURL(data.url + 'dry/trendGraph/png');
+    request.get(url).pipe(res);
+  });
+};
+
 
 exports.jobParse = function(req,res,next,job) {
   console.log('Job: ' + job);

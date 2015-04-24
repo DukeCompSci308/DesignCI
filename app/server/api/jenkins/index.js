@@ -15,4 +15,6 @@ router.get('/semester/:semester/project/:job', controller.job);
 
 router.get('/semester/:semester/project/:job/metrics', controller.metrics);
 
+router.get('/semester/:semester/project/:job/metrics/dry', controller.dryImage);
+
 module.exports = router;
