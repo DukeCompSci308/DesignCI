@@ -86,23 +86,8 @@ var sonarqube = function() {
           var parsed = JSON.parse(body);
           delete parsed.components;
 
-
-          metricsData = {};
-
-
-          if (parsed.hasOwnProperty('msr')) {
-            for (var prop in parsed.msr) {
-              var info = parsed.msr[prop];
-              metricsData[info.key] = { value: info.val, formattedValue: info.frmt_val };
-            }
-          }
-
-          parsed.metrics = metricsData;
-
           return callback(error, parsed);
         });
-
-
     },
     test: function() {
       api.get('/languages/list', function(error, response, body) {
