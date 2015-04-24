@@ -23,7 +23,7 @@ div(ng-include='"components/navbar/navbar.html"')
     a(href="{{project.jenkins.lastCompletedBuild.url}}/console") error logs.
   .row
       .col-lg-6
-        code-issues(metrics="metrics.sonarmetrics", issues="issues")
+        code-issues(metrics="metrics.sonarmetrics", issues="issues", url="project.sonarqube")
       .col-lg-6
         .row
           .col-lg-12
