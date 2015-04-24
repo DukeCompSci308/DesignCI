@@ -1,5 +1,6 @@
 .panel.panel-danger
-  .panel-heading Issues
+  .panel-heading Code Issues: {{metrics.metrics.violations.formattedValue}}&nbsp;
+    a(href='{{url}}') total issues
   .panel-body
     .row
       .col-lg-12
@@ -7,9 +8,9 @@
           i.fa.fa-exclamation-triangle
           span &nbsp;Blocker Issues: {{metrics.metrics.blocker_violations.formattedValue}}
         div.alert.alert-warning(role='alert')
-          i.fa.fa-exclamation-triangle
+          i.fa.fa-exclamation-circle
           span &nbsp;Critical Issues: {{metrics.metrics.critical_violations.formattedValue}}
         div.alert.alert-info(role='alert')
-          i.fa.fa-exclamation-triangle
+          i.fa.fa-exclamation
           span &nbsp;Major Issues: {{metrics.metrics.major_violations.formattedValue}}
 

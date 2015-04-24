@@ -6,7 +6,8 @@ angular.module('appApp')
       templateUrl: 'app/codeIssues/codeIssues.html',
       restrict: 'EA',
       scope: {
-        metrics: '=metrics'
+        metrics: '=metrics',
+        url: '=url'
       },
       link: function (scope, element, attrs) {
       }
