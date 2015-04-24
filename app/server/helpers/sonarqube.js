@@ -66,6 +66,44 @@ var sonarqube = function() {
           return callback(error, parsed);
       });
     },
+    issues: function(project, callback) {
+      //projectKeys=duke-compsci308-spring2015.voogasalad_ScrollingDeep:voogasalad_ScrollingDeep&severities=BLOCKER,CRITICAL, MAJOR&statuses=OPEN,CONFIRMED&s=SEVERITY&asc=false
+      api.get(
+        {
+          url: '/issues/search',
+          qs: {
+            projectKeys: project,
+            severities: 'BLOCKER,CRITICAL,MAJOR',
+            statuses: 'OPEN,CONFIRMED',
+            s: 'SEVERITY',
+            asc: 'false'
+          }
+        },
+        function(error, response, body) {
+          if (error) {
+            return callback(error, {});
+          }
+          var parsed = JSON.parse(body);
+          delete parsed.components;
+
+
+          metricsData = {};
+
+
+          if (parsed.hasOwnProperty('msr')) {
+            for (var prop in parsed.msr) {
+              var info = parsed.msr[prop];
+              metricsData[info.key] = { value: info.val, formattedValue: info.frmt_val };
+            }
+          }
+
+          parsed.metrics = metricsData;
+
+          return callback(error, parsed);
+        });
+
+
+    },
     test: function() {
       api.get('/languages/list', function(error, response, body) {
         if (error) {

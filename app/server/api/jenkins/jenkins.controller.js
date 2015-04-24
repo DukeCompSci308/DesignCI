@@ -104,6 +104,17 @@ exports.dryImage = function(req, res) {
   });
 };
 
+exports.issues = function(req, res) {
+  var jenkinsJob = buildAPIURL(req.semesterName, req.jobURL);
+
+  getSonarURL(jenkinsJob, function(err, sonar) {
+    var sonarKey = sonar.substr(sonar.lastIndexOf('/') + 1);
+    sonarqube.metrics(sonarKey, function(err, data) {
+
+      callback(null, data);
+    });
+  });
+};
 
 exports.jobParse = function(req,res,next,job) {
   console.log('Job: ' + job);
