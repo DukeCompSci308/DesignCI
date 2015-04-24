@@ -109,9 +109,13 @@ exports.issues = function(req, res) {
 
   getSonarURL(jenkinsJob, function(err, sonar) {
     var sonarKey = sonar.substr(sonar.lastIndexOf('/') + 1);
-    sonarqube.metrics(sonarKey, function(err, data) {
-
-      callback(null, data);
+    sonarqube.issues(sonarKey, function(err, data) {
+      if (err) {
+        res.status(404).json({});
+      }
+      else {
+        res.json(data);
+      }
     });
   });
 };

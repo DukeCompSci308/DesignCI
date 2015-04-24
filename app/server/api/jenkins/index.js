@@ -11,6 +11,8 @@ router.param('job', controller.jobParse);
 
 router.get('/', controller.index);
 
+router.get('/semester/:semester/project/:job/issues', controller.issues);
+
 router.get('/semester/:semester/project/:job', controller.job);
 
 router.get('/semester/:semester/project/:job/metrics', controller.metrics);
