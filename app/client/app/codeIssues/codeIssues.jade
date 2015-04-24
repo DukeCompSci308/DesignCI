@@ -2,7 +2,14 @@
   .panel-heading Issues
   .panel-body
     .row
-      .col-lg-4
-        p Blocker Issues
-      .col-lg-4
-      .col-lg-4
+      .col-lg-12
+        div.alert.alert-danger(role='alert')
+          i.fa.fa-exclamation-triangle
+          span &nbsp;Blocker Issues: {{metrics.metrics.blocker_violations.formattedValue}}
+        div.alert.alert-warning(role='alert')
+          i.fa.fa-exclamation-triangle
+          span &nbsp;Critical Issues: {{metrics.metrics.critical_violations.formattedValue}}
+        div.alert.alert-info(role='alert')
+          i.fa.fa-exclamation-triangle
+          span &nbsp;Major Issues: {{metrics.metrics.major_violations.formattedValue}}
+
